@@ -22,7 +22,7 @@ for i=1:par.Iter
     DT = norm(DT, 'fro');
     RT = sum(sum(abs(A)));
     f_curr = 0.5 * DT^2 + par.nSig^2 * RT;
-    fprintf('TSODLSC Energy, %d th: %2.8f\n', i, f_curr);
+%     fprintf('TSODLSC Energy, %d th: %2.8f\n', i, f_curr);
     if (abs(f_prev - f_curr) / f_curr < par.epsilon)
         break;
     end

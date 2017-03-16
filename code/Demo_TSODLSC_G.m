@@ -12,7 +12,7 @@ par.win = min(3*par.ps, 20);
 par.outerIter = 8;
 par.innerIter = 2;
 par.Iter = 100;
-par.epsilon = 0.001;
+par.epsilon = 0.01;
 
 par.delta = 0.1;
 for lambda = 0:0.1:1
