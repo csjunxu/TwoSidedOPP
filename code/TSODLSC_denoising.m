@@ -1,4 +1,4 @@
-function  [im_out,par]    =   LSSC_denoising_1A(par)
+function  [im_out, par]    =   TSODLSC_denoising(par)
 im_out    =   par.nim;
 % parameters for noisy image
 [h,  w, ch]      =  size(im_out);
@@ -6,16 +6,23 @@ par.h = h;
 par.w = w;
 par.ch = ch;
 par = SearchNeighborIndex( par );
+NY = Image2PatchNew( par.nim, par );
 for ite  =  1 : par.outerIter
     % iterative regularization
     im_out = im_out + par.delta * (par.nim - im_out);
     % image to patches and estimate local noise variance
     Y = Image2PatchNew( im_out, par);
+    % estimate local noise variance, par.lambdals is put here since the MAP
+    % and Bayesian rules
+    Sigma = par.lambda*sqrt(abs(repmat(par.nSig^2, 1, size(Y, 2)) - mean((NY - Y).^2))); %Estimated Local Noise Level
     % estimation of noise variance
     if mod(ite-1,par.innerIter)==0
-        par.nlsp = par.nlsp - 10;
+        %         par.nlsp = par.nlsp - 10;
         % searching  non-local patches
         blk_arr = Block_Matching( Y, par);
+        if ite == 1
+            Sigma = par.nSig * ones(size(Sigma));
+        end
     end
     % Weighted Sparse Coding
     Y_hat = zeros(par.ps2ch, par.maxrc, 'single');
@@ -24,11 +31,12 @@ for ite  =  1 : par.outerIter
         index = blk_arr(:, i);
         nlY = Y( : , index );
         DC = mean(nlY, 2);
+        par.Sigma = Sigma(index(1));
         nDCnlY = bsxfun(@minus, nlY, DC);
         % Recovered Estimated Patches by weighted least square and weighted
         % sparse coding model
-        nDCnlYhat = LSSC(nDCnlY, par);
-        % add DC components 
+        nDCnlYhat = TSODLSC(nDCnlY, par);
+        % add DC components
         nlYhat = bsxfun(@plus, nDCnlYhat, DC);
         % aggregation
         Y_hat(:, index) = Y_hat(:, index) + nlYhat;
