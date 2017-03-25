@@ -11,11 +11,11 @@ par.win = min(3*par.ps, 20);
 
 par.outerIter = 8;
 par.innerIter = 2;
-par.Iter = 100;
+par.Iter = 10;
 par.epsilon = 0.01;
 
-par.delta = 0.1;
-for lambda = 0:0.1:1
+par.delta = 0;
+for lambda = 1:0.5:4
     par.lambda = lambda;
     % record all the results in each iteration
     par.PSNR = zeros(par.outerIter, im_num, 'single');
