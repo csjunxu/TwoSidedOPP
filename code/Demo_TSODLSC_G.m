@@ -44,8 +44,8 @@ for lambda = 2:1:5
         % calculate the PSNR
         par.PSNR(par.outerIter, par.image)  =   csnr( im_out*255, par.I*255, 0, 0 );
         par.SSIM(par.outerIter, par.image)      =  cal_ssim( im_out*255, par.I*255, 0, 0 );
-        %             imname = sprintf('nSig%d_clsnum%d_delta%2.2f_lambda%2.2f_%s', nSig, cls_num, delta, lambda, im_dir(i).name);
-        %             imwrite(im_out,imname);
+        imname = sprintf(['TSODLSC_1AG_nSig' num2str(nSig) '_delta' num2str(par.delta) '_lsc' num2str(par.lambda) '_Iter' num2str(par.Iter) '_' im_dir(i).name]);
+        imwrite(im_out,imname);
         fprintf('%s : PSNR = %2.4f, SSIM = %2.4f \n',im_dir(i).name, par.PSNR(par.outerIter, par.image),par.SSIM(par.outerIter, par.image)     );
     end
     mPSNR=mean(par.PSNR,2);
