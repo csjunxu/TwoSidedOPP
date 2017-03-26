@@ -6,10 +6,10 @@ im_num = length(im_dir);
 
 nSig = 40;
 par.ps = 7; % patch size
-par.step = 3; % the step of two neighbor patches
-par.win = min(3*par.ps, 20);
+par.step = 6; % the step of two neighbor patches
+par.win = 20;
 
-par.outerIter = 8;
+par.outerIter = 14;
 par.innerIter = 2;
 par.Iter = 10;
 par.epsilon = 0.01;

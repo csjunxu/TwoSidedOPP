@@ -17,7 +17,8 @@ for ite  =  1 : par.outerIter
     Sigma = par.lambda*sqrt(abs(repmat(par.nSig^2, 1, size(Y, 2)) - mean((NY - Y).^2))); %Estimated Local Noise Level
     % estimation of noise variance
     if mod(ite-1,par.innerIter)==0
-        %         par.nlsp = par.nlsp - 10;
+        % par.nlsp = par.nlsp - 10;
+        % par.nlsp = min(par.nlsp, 30);
         % searching  non-local patches
         blk_arr = Block_Matching( Y, par);
         if ite == 1
