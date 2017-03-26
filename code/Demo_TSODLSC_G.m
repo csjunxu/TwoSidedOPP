@@ -15,14 +15,14 @@ par.Iter = 10;
 par.epsilon = 0.01;
 
 par.delta = 0;
-for lambda = 1:0.5:4
+for lambda = 2:1:5
     par.lambda = lambda;
     % record all the results in each iteration
     par.PSNR = zeros(par.outerIter, im_num, 'single');
     par.SSIM = zeros(par.outerIter, im_num, 'single');
     T512 = [];
     T256 = [];
-    for i = 1:im_num
+    for i = 12%:im_num
         par.nlsp = 70;  % number of non-local patches
         par.image = i;
         par.nSig = nSig/255;
