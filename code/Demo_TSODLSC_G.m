@@ -9,13 +9,13 @@ par.ps = 7; % patch size
 par.step = 6; % the step of two neighbor patches
 par.win = 20;
 
-par.outerIter = 14;
+par.outerIter = 12;
 par.innerIter = 2;
 par.Iter = 10;
 par.epsilon = 0.01;
 
 par.delta = 0;
-for lambda = 2:1:5
+for lambda = 1.5:0.5:5
     par.lambda = lambda;
     % record all the results in each iteration
     par.PSNR = zeros(par.outerIter, im_num, 'single');
