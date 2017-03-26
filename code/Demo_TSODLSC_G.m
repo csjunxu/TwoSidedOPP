@@ -9,20 +9,20 @@ par.ps = 7; % patch size
 par.step = 6; % the step of two neighbor patches
 par.win = 20;
 
-par.outerIter = 12;
+par.outerIter = 6;
 par.innerIter = 2;
-par.Iter = 10;
+par.Iter = 100;
 par.epsilon = 0.01;
 
 par.delta = 0;
-for lambda = 1.5:0.5:5
+for lambda = 5.5:0.5:8
     par.lambda = lambda;
     % record all the results in each iteration
     par.PSNR = zeros(par.outerIter, im_num, 'single');
     par.SSIM = zeros(par.outerIter, im_num, 'single');
     T512 = [];
     T256 = [];
-    for i = 12%:im_num
+    for i = 1:im_num
         par.nlsp = 70;  % number of non-local patches
         par.image = i;
         par.nSig = nSig/255;
