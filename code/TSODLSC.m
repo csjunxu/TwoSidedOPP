@@ -9,7 +9,7 @@ for i=1:par.Iter
     
     % update A by soft thresholding
     B = T' * Y * S';
-    A = sign(B) .* max(abs(B) - par.nSig^2, 0);
+    A = sign(B) .* max(abs(B) - par.Sigma^2, 0);
     
     % update T and S
     [U1, ~, V1] = svd( Y, 'econ');
